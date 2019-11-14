@@ -24,11 +24,17 @@ public class MainMenuScreen extends ScreenBeta {
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
 
+        Label titleText = new Label("Mass Droids", skin);
+        titleText.setPosition( MyGame.SCREEN_WIDTH * 0.5f, MyGame.SCREEN_HEIGHT * 0.7f);
+        titleText.setAlignment( Align.center );
+        titleText.setFontScale(8, 8);
+        uiStage.addActor(titleText);
+
         float btnWidth = MyGame.SCREEN_WIDTH / 4;
         float btnHeight = MyGame.SCREEN_HEIGHT/ 8;
 
         TextButton playButton = new TextButton("Play", skin);
-        playButton.setPosition( MyGame.SCREEN_WIDTH * 0.7f, MyGame.SCREEN_HEIGHT * 0.4f  );
+        playButton.setPosition( MyGame.SCREEN_WIDTH * 0.5f, MyGame.SCREEN_HEIGHT * 0.4f  );
         playButton.setSize(btnWidth, btnHeight );
         playButton.getLabel().setFontScale(3, 3 );
         playButton.addListener(new ClickListener(){
@@ -40,24 +46,18 @@ public class MainMenuScreen extends ScreenBeta {
         );
         uiStage.addActor(playButton);
 
-        TextButton optionButton = new TextButton("Help", skin);
-        optionButton.setPosition( MyGame.SCREEN_WIDTH * 0.7f, MyGame.SCREEN_HEIGHT * 0.25f  );
+        TextButton optionButton = new TextButton("Options", skin);
+        optionButton.setPosition( MyGame.SCREEN_WIDTH * 0.5f, MyGame.SCREEN_HEIGHT * 0.25f  );
         optionButton.setSize(btnWidth, btnHeight );
         optionButton.getLabel().setFontScale(3, 3 );
         optionButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
-                   mainGame.setScreen( new HelpScreen(mainGame) );
+                   mainGame.setScreen( new OptionMenuScreen(mainGame) );
                };
            }
         );
         uiStage.addActor(optionButton);
-
-        Label titleText = new Label("Mass Droids", skin);
-        titleText.setPosition( MyGame.SCREEN_WIDTH * 0.5f, MyGame.SCREEN_HEIGHT * 0.7f);
-        titleText.setAlignment( Align.center );
-        titleText.setFontScale(8, 8);
-        uiStage.addActor(titleText);
 
 //        ParticleActor particle = new ParticleActor("effects/fire_splash.pfx", "effects");
 //        particle.setPosition(SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.5f );

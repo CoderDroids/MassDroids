@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.base.GameBeta;
 import com.mygdx.game.screen.SplashScreen;
@@ -18,6 +19,7 @@ public class MyGame extends GameBeta {
 
         SCREEN_WIDTH = Gdx.graphics.getWidth();
         SCREEN_HEIGHT = Gdx.graphics.getHeight();
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         splashScreen = new SplashScreen(this);
         setActiveScreen( splashScreen );
