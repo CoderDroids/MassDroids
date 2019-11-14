@@ -1,27 +1,20 @@
-package com.mygdx.game;
+package com.mygdx.game.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.base.ActorBeta;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.base.GameBeta;
 import com.mygdx.game.base.ScreenBeta;
-
-import java.awt.HeadlessException;
+import com.mygdx.game.screen.MainMenuScreen;
 
 import static com.mygdx.game.MyGame.SCREEN_WIDTH;
 import static com.mygdx.game.MyGame.SCREEN_HEIGHT;
 
-public class StartScreen extends ScreenBeta {
+public class SplashScreen extends ScreenBeta {
 
-    public StartScreen(GameBeta game )
+    public SplashScreen(GameBeta game )
     {
         super(game);
     }
