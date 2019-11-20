@@ -1,6 +1,8 @@
 package com.mygdx.game.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -27,11 +29,33 @@ public class SplashScreen extends ScreenBeta {
         float btnWidth = SCREEN_WIDTH / 4;
         float btnHeight = SCREEN_HEIGHT / 4;
 
+
+        Image backgroundColor = new Image(new Texture("blackBackground.jpg"));
+        backgroundColor.setPosition(-300,0);
+        backgroundColor.setScale(30.0f);
+        uiStage.addActor(backgroundColor);
+
+
+        Image playerInfo = new Image(new Texture("GameCover.jpg"));
+        playerInfo.setPosition(-300,150);
+        playerInfo.setScale(2.0f);
+        uiStage.addActor(playerInfo);
+
+        Label titleText = new Label("MASS DROIDS", skin);
+        titleText.setPosition( MyGame.SCREEN_WIDTH * 0.45f, MyGame.SCREEN_HEIGHT * 0.7f);
+        titleText.setAlignment( Align.center );
+        titleText.setFontScale(8, 8);
+
+        uiStage.addActor(titleText);
+
+
         Label infoText = new Label("Touch to start", skin);
-        infoText.setPosition( MyGame.SCREEN_WIDTH * 0.5f, MyGame.SCREEN_HEIGHT * 0.3f);
+        infoText.setPosition( MyGame.SCREEN_WIDTH * 0.45f, MyGame.SCREEN_HEIGHT * 0.3f);
         infoText.setAlignment( Align.center );
         infoText.setFontScale(4, 4);
+
         uiStage.addActor(infoText);
+
     }
 
     @Override
