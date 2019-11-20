@@ -95,7 +95,7 @@ public class OptionMenuScreen extends ScreenBeta {
         aboutButton.addListener(new ClickListener(){
                                      @Override
                                      public void clicked(InputEvent event, float x, float y) {
-                 mainGame.setScreen( new AboutScreen(mainGame) );
+                 mainGame.setScreen( new ExitScreen(mainGame) );
              };
          }
         );
