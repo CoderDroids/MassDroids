@@ -54,7 +54,7 @@ public class MainMenuScreen extends ScreenBeta {
         playButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
-                   mainGame.setScreen( new GameplayScreen(mainGame) );
+                   mainGame.setScreen( new GameplayScreen2(mainGame) );
                };
            }
         );
