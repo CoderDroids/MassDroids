@@ -192,7 +192,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor {
         update(delta);
         mainStage.setDebugAll(true);
 
-        Gdx.gl.glClearColor(0, 0.5f, 0.5f, 1.0f);
+        Gdx.gl.glClearColor(0, 0, 0, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         for( int i = 0; i < stages.size(); i++ )

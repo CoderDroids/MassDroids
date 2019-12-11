@@ -26,12 +26,6 @@ public class MainMenuScreen extends ScreenBeta {
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
 
-
-        Image backgroundColor = new Image(new Texture("blackBackground.jpg"));
-        backgroundColor.setPosition(-300,0);
-        backgroundColor.setScale(30.0f);
-        uiStage.addActor(backgroundColor);
-
         Image playerInfo = new Image(new Texture("GameCover.jpg"));
         playerInfo.setPosition(-300,150);
         playerInfo.setScale(2.0f);

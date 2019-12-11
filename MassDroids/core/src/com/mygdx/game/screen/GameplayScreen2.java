@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.base.ActorBeta;
 import com.mygdx.game.base.GameBeta;
 import com.mygdx.game.base.ScreenBeta;
+import com.mygdx.game.Map.Map;
 
 public class GameplayScreen2 extends ScreenBeta {
 
@@ -36,6 +37,7 @@ public class GameplayScreen2 extends ScreenBeta {
     float buildBuildiumCost;
     float buildGoldCost;
 
+    Map gameMapTest;
 
     @Override
     public void initialize() {
@@ -102,6 +104,7 @@ public class GameplayScreen2 extends ScreenBeta {
         );
 
 
+        gameMapTest = new Map(mainStage);
 //--------------Example-------------------//
         exampleTile = new TextButton("'Tile'", skin);
         exampleTile.setSize(300, 300 );

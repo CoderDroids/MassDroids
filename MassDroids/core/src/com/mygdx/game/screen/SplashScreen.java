@@ -30,11 +30,6 @@ public class SplashScreen extends ScreenBeta {
         float btnHeight = SCREEN_HEIGHT / 4;
 
 
-        Image backgroundColor = new Image(new Texture("blackBackground.jpg"));
-        backgroundColor.setPosition(-300,0);
-        backgroundColor.setScale(30.0f);
-        uiStage.addActor(backgroundColor);
-
 
         Image playerInfo = new Image(new Texture("GameCover.jpg"));
         playerInfo.setPosition(-300,150);
