@@ -47,7 +47,9 @@ public class Map extends ActorBeta {
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
             Tile testTile = new Tile();
-            testTile.tileType = 2;
+            testTile.tileType = 36;
+            testTile.buildium = 12;
+            testTile.gold = 3;
             mapTiles.add(testTile);
         }
         mapTiles.get(24).tileType = 5;
