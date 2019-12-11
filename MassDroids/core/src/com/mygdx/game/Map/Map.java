@@ -90,9 +90,14 @@ public class Map extends ActorBeta {
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
+        batch.draw(m_fbo.getColorBufferTexture(), 0, 0,cameraX,cameraY,WIDTH,HEIGHT);
+    }
+
+    @Override
+    public void act(float dt) {
         // temporary to show scrolling
         cameraX++;
         //end example
-        batch.draw(m_fbo.getColorBufferTexture(), 0, 0,cameraX,cameraY,WIDTH,HEIGHT);
     }
+
 }
