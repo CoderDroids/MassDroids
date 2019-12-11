@@ -16,21 +16,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Map extends ActorBeta {
 
-    static int WIDTH = Gdx.graphics.getWidth();
-    static int HEIGHT = Gdx.graphics.getHeight();
-
-    Array<Tile> mapTiles = new Array<Tile>();
-    int mapWidth = 20;
+    int mapWidth = 20; //number of tiles to each axis
     int mapHeight = 40;
-    FrameBuffer m_fbo;
-    int cameraX =0;
+    int cameraX =0; //camera coordinates
     int cameraY =0;
-    int mapScale = 4;
+    int mapScale = 4; //visual zoom feature
 
+
+    FrameBuffer m_fbo;
     Texture loadedTexture;
     Array<TextureRegion> textureArray;
     SpriteBatch batch;
-    
+    static int WIDTH = Gdx.graphics.getWidth();
+    static int HEIGHT = Gdx.graphics.getHeight();
+    Array<Tile> mapTiles = new Array<Tile>();
+
     public Map(Stage s) {
         super(0, 0, s);
         loadedTexture = new Texture(Gdx.files.internal("tiles.png"));
