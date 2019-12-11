@@ -41,6 +41,8 @@ public class Map extends ActorBeta {
         }
 
         //exapmple usage
+        //note i will set all the values per tile type so the only thing that needs to be set here is the type
+        //it should be fine to randomly select from tiles to build map
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
             Tile testTile = new Tile();
@@ -48,6 +50,12 @@ public class Map extends ActorBeta {
             mapTiles.add(testTile);
         }
         mapTiles.get(42).tileType = 5;
+        mapTiles.get(42).playerThatOwns = 1;
+        mapTiles.get(42).gold = 10;
+        mapTiles.get(42).buildium = 50;
+        mapTiles.get(42).defenders = 5;
+        mapTiles.get(42).attackers = 1;
+        mapTiles.get(42).defensiveValue = 2;
         // end example
 
         batch =  new SpriteBatch();
@@ -90,9 +98,28 @@ public class Map extends ActorBeta {
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
+        batch.draw(m_fbo.getColorBufferTexture(), 0, 0,cameraX,cameraY,WIDTH,HEIGHT);
+    }
+
+    @Override
+    public void act(float dt) {
         // temporary to show scrolling
         cameraX++;
         //end example
-        batch.draw(m_fbo.getColorBufferTexture(), 0, 0,cameraX,cameraY,WIDTH,HEIGHT);
     }
+
+    public Tile screenSpaceCoordinatesToTile(int x,int y) //give x,y coordiantes on screen returns the tile that was touched
+    {
+        x += cameraX;
+        y+= cameraY;
+        x = x%mapWidth;
+        y = y/mapWidth;
+        return getTile2D(x/(16*mapScale),y/(16*mapScale));
+    }
+
+    public Tile getTile2D(int x,int y) //converts 1D tile array into a 2D array
+    {
+        return mapTiles.get(mapWidth * x + y);
+    }
+
 }
