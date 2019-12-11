@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.Map.Tile;
 import com.mygdx.game.base.ActorBeta;
 import com.mygdx.game.base.GameBeta;
 import com.mygdx.game.base.ScreenBeta;
@@ -44,8 +45,12 @@ public class GameplayScreen2 extends ScreenBeta {
         ActorBeta.setWorldBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
 
-        buildium = 100.0f;
-        gold = 20.0f;
+        gameMapTest = new Map(mainStage);
+        //Tile test = new Tile();
+        //test = gameMapTest.mapTiles.get(24);
+        //test = gameMapTest.getTile2D(1,2);
+        buildium = 100;
+        gold = 20;
         buildBuildiumCost = 20.0f;
         buildGoldCost = 20.0f;
 
@@ -104,9 +109,8 @@ public class GameplayScreen2 extends ScreenBeta {
         );
 
 
-        gameMapTest = new Map(mainStage);
 //--------------Example-------------------//
-        exampleTile = new TextButton("'Tile'", skin);
+        /*exampleTile = new TextButton("'Tile'", skin);
         exampleTile.setSize(300, 300 );
         exampleTile.setPosition(500, 600);
         exampleTile.getLabel().setFontScale(3.0f);
@@ -169,13 +173,13 @@ public class GameplayScreen2 extends ScreenBeta {
                                }
                            }
         );
-
+*/
         mainStage.addActor(buildiumLabel);
         mainStage.addActor(goldLabel);
-        mainStage.addActor(exampleTile);
-        mainStage.addActor(build1);
-        mainStage.addActor(build2);
-        mainStage.addActor(buildBackButton);
+        //mainStage.addActor(exampleTile);
+        //mainStage.addActor(build1);
+        //mainStage.addActor(build2);
+       // mainStage.addActor(buildBackButton);
         mainStage.addActor(mainMenuButton);
         mainStage.addActor(backButton);
         mainStage.addActor(homeButton);
@@ -183,8 +187,8 @@ public class GameplayScreen2 extends ScreenBeta {
 
     @Override
     public void update(float dt) {
-        buildiumLabel.setText("Buildium Available: "+ buildium);
-        goldLabel.setText("Gold Available: "+ gold);
+        //buildiumLabel.setText("Buildium Available: "+ buildium);
+        //goldLabel.setText("Gold Available: "+ gold);
 
     }
 
@@ -192,4 +196,19 @@ public class GameplayScreen2 extends ScreenBeta {
     public void dispose() {
         super.dispose();
     }
+
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        Tile test = gameMapTest.screenSpaceCoordinatesToTile(screenX,screenY);
+
+        buildiumLabel.setText("Buildium Available: "+ test.buildium);
+        //buildiumLabel.setText(screenX);
+        goldLabel.setText("Gold Available: "+ test.gold);
+        //goldLabel.setText(screenY);
+
+        return false;
+    }
+
 }

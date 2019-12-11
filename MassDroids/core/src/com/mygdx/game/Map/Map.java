@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Matrix4;
 import com.mygdx.game.base.ActorBeta;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,11 +17,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Map extends ActorBeta {
 
-    int mapWidth = 20; //number of tiles to each axis
+    int mapWidth = 22; //number of tiles to each axis
     int mapHeight = 40;
     int cameraX =0; //camera coordinates
     int cameraY =0;
-    int mapScale = 4; //visual zoom feature
+    int mapScale = 6; //visual zoom feature
 
 
     FrameBuffer m_fbo;
@@ -29,7 +30,7 @@ public class Map extends ActorBeta {
     SpriteBatch batch;
     static int WIDTH = Gdx.graphics.getWidth();
     static int HEIGHT = Gdx.graphics.getHeight();
-    Array<Tile> mapTiles = new Array<Tile>();
+    public Array<Tile> mapTiles = new Array<Tile>();
 
     public Map(Stage s) {
         super(0, 0, s);
@@ -46,16 +47,19 @@ public class Map extends ActorBeta {
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
             Tile testTile = new Tile();
-            testTile.tileType = 36;
+            testTile.tileType = 2;
             mapTiles.add(testTile);
         }
-        mapTiles.get(42).tileType = 5;
-        mapTiles.get(42).playerThatOwns = 1;
-        mapTiles.get(42).gold = 10;
-        mapTiles.get(42).buildium = 50;
-        mapTiles.get(42).defenders = 5;
-        mapTiles.get(42).attackers = 1;
-        mapTiles.get(42).defensiveValue = 2;
+        mapTiles.get(24).tileType = 5;
+        mapTiles.get(24).playerThatOwns = 1;
+        mapTiles.get(24).gold = 10;
+        mapTiles.get(24).buildium = 50;
+        mapTiles.get(24).defenders = 5;
+        mapTiles.get(24).attackers = 1;
+        mapTiles.get(24).defensiveValue = 2;
+
+        //mapTiles.get(4).tileType = 0;
+
         // end example
 
         batch =  new SpriteBatch();
@@ -64,13 +68,16 @@ public class Map extends ActorBeta {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, 0,  (int)(16* mapWidth*mapScale),(int)(16* mapHeight*mapScale)); // here is the actual size you want
+        batch.setProjectionMatrix(matrix);
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
-            batch.draw(textureArray.get(36), i%mapWidth *16*mapScale,i/mapWidth *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
+            batch.draw(textureArray.get(35), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
         }
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
-            batch.draw(textureArray.get(mapTiles.get(i).tileType), i%mapWidth *16*mapScale,i/mapWidth *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
+            batch.draw(textureArray.get(mapTiles.get(i).tileType), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
         }
         batch.end();
         m_fbo.end();
@@ -84,11 +91,11 @@ public class Map extends ActorBeta {
         batch.begin();
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
-            batch.draw(textureArray.get(36), i%mapWidth *16*mapScale,i/mapWidth *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
+            batch.draw(textureArray.get(35), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
         }
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
-            batch.draw(textureArray.get(mapTiles.get(i).tileType), i%mapWidth *16*mapScale,i/mapWidth *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
+            batch.draw(textureArray.get(mapTiles.get(i).tileType), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
         }
         batch.end();
         m_fbo.end();
@@ -98,28 +105,29 @@ public class Map extends ActorBeta {
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
-        batch.draw(m_fbo.getColorBufferTexture(), 0, 0,cameraX,cameraY,WIDTH,HEIGHT);
+        //batch.draw(m_fbo.getColorBufferTexture(), 0, 0,0,0,WIDTH,HEIGHT);
+        batch.draw(m_fbo.getColorBufferTexture(),0, 0 ,WIDTH , HEIGHT, cameraX, cameraY, WIDTH, HEIGHT,false,false);
     }
 
     @Override
     public void act(float dt) {
         // temporary to show scrolling
-        cameraX++;
+        //cameraX++;
         //end example
     }
 
     public Tile screenSpaceCoordinatesToTile(int x,int y) //give x,y coordiantes on screen returns the tile that was touched
     {
         x += cameraX;
-        y+= cameraY;
-        x = x%mapWidth;
-        y = y/mapWidth;
-        return getTile2D(x/(16*mapScale),y/(16*mapScale));
+        y += cameraY;
+        x = x/(16*mapScale);
+        y = y/(16*mapScale);
+        return getTile2D(x,y);
     }
 
     public Tile getTile2D(int x,int y) //converts 1D tile array into a 2D array
     {
-        return mapTiles.get(mapWidth * x + y);
+        return mapTiles.get(mapWidth * y + x);
     }
 
 }
