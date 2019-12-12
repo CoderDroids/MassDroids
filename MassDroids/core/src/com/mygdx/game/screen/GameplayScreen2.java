@@ -1,8 +1,11 @@
 package com.mygdx.game.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -47,6 +50,7 @@ public class GameplayScreen2 extends ScreenBeta {
     public void initialize() {
         ActorBeta.setWorldBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
+        Skin skinWithBg = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
 
         gameMapTest = new Map(mainStage);
         //Tile test = new Tile();
@@ -113,13 +117,21 @@ public class GameplayScreen2 extends ScreenBeta {
 
 
 //--------------Example-------------------//
-        tileInfoText = new Label("", skin);
+
+
+        tileInfoText = new Label("", skinWithBg);
         tileInfoText.setFontScale(2.0f);
-        tileInfoText.setAlignment(Align.bottomRight);
+        tileInfoText.setAlignment(Align.left);
         tileInfoText.setWrap(true);
-        tileInfoText.setSize(Gdx.graphics.getWidth() , 200);
-        tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 200 + tileInfoText.getHeight());
+        tileInfoText.setSize(Gdx.graphics.getWidth()/2 +50, 200);
+        tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth() -200, 200 + tileInfoText.getHeight());
         tileInfoText.setVisible(false);
+
+
+        Pixmap labelColor = new Pixmap(Gdx.graphics.getWidth()/2 , 200, Pixmap.Format.RGB888);
+        labelColor.setColor(Color.BLACK);
+        labelColor.fill();
+        tileInfoText.getStyle().background = new Image(new Texture(labelColor)).getDrawable();
 
 
         tileInfoBackButton = new TextButton("close", skin);
