@@ -30,10 +30,9 @@ public class GameplayScreen2 extends ScreenBeta {
     TextButton mainMenuButton;
     TextButton backButton;
 
-    TextButton exampleTile;
-    TextButton build1;
-    TextButton build2;
-    TextButton buildBackButton;
+
+    Label tileInfoText;
+    TextButton tileInfoBackButton;
 
     float buildBuildiumCost;
     float buildGoldCost;
@@ -114,79 +113,38 @@ public class GameplayScreen2 extends ScreenBeta {
 
 
 //--------------Example-------------------//
-        /*exampleTile = new TextButton("'Tile'", skin);
-        exampleTile.setSize(300, 300 );
-        exampleTile.setPosition(500, 600);
-        exampleTile.getLabel().setFontScale(3.0f);
-        exampleTile.setVisible(true);
-        exampleTile.addListener(new ClickListener(){
-                                   @Override
-                                   public void clicked(InputEvent event, float x, float y) {
-                                        build1.setVisible(true);
-                                        build2.setVisible(true);
-                                        buildBackButton.setVisible(true);
-                                   }
-                               }
-        );
+        tileInfoText = new Label("", skin);
+        tileInfoText.setFontScale(2.0f);
+        tileInfoText.setAlignment(Align.bottomRight);
+        tileInfoText.setWrap(true);
+        tileInfoText.setSize(Gdx.graphics.getWidth() , 200);
+        tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 200 + tileInfoText.getHeight());
+        tileInfoText.setVisible(false);
 
-        build1 = new TextButton("Buildium = " + buildBuildiumCost, skin);
-        build1.setSize(700, 200 );
-        build1.setPosition(Gdx.graphics.getWidth()/2 -  build1.getWidth()/2, Gdx.graphics.getHeight()/2 - build1.getHeight()/2);
-        build1.getLabel().setFontScale(3.0f);
-        build1.setVisible(false);
-        build1.addListener(new ClickListener(){
-                                       @Override
-                                       public void clicked(InputEvent event, float x, float y) {
-                                           build1.setVisible(false);
-                                           build2.setVisible(false);
-                                           buildBackButton.setVisible(false);
-                                           exampleTile.setVisible(false);
-                                           buildium -= 20.0f;
-                                       }
-                                   }
-        );
 
-        build2 = new TextButton("Gold = " + buildGoldCost, skin);
-        build2.setSize(700, 200 );
-        build2.setPosition(Gdx.graphics.getWidth()/2 - build2.getWidth()/2, Gdx.graphics.getHeight()/2 - build2.getHeight()/2 - build1.getHeight());
-        build2.getLabel().setFontScale(3.0f);
-        build2.setVisible(false);
-        build2.addListener(new ClickListener(){
-                                   @Override
-                                   public void clicked(InputEvent event, float x, float y) {
-                                       build1.setVisible(false);
-                                       build2.setVisible(false);
-                                       buildBackButton.setVisible(false);
-                                       exampleTile.setVisible(false);
-                                       gold -= 20.0f;
-                                   }
-                               }
-        );
-
-        buildBackButton = new TextButton("Back", skin);
-        buildBackButton.setSize(700, 200 );
-        buildBackButton.setPosition(Gdx.graphics.getWidth()/2 - buildBackButton.getWidth()/2, Gdx.graphics.getHeight()/2 - buildBackButton.getHeight()/2 - build1.getHeight() - build2.getHeight());
-        buildBackButton.getLabel().setFontScale(3.0f);
-        buildBackButton.setVisible(false);
-        buildBackButton.addListener(new ClickListener(){
+        tileInfoBackButton = new TextButton("close", skin);
+        tileInfoBackButton.setSize(350, 100 );
+        tileInfoBackButton.setPosition(Gdx.graphics.getWidth() - tileInfoBackButton.getWidth(),0);
+        tileInfoBackButton.getLabel().setFontScale(2.0f);
+        tileInfoBackButton.setVisible(false);
+        tileInfoBackButton.addListener(new ClickListener(){
                                @Override
                                public void clicked(InputEvent event, float x, float y) {
-                                   build1.setVisible(false);
-                                   build2.setVisible(false);
-                                   buildBackButton.setVisible(false);
+                                   tileInfoText.setVisible(false);
+                                   tileInfoBackButton.setVisible(false);
                                }
                            }
         );
-*/
+        // end example
+
         mainStage.addActor(buildiumLabel);
         mainStage.addActor(goldLabel);
-        //mainStage.addActor(exampleTile);
-        //mainStage.addActor(build1);
-        //mainStage.addActor(build2);
-       // mainStage.addActor(buildBackButton);
         mainStage.addActor(mainMenuButton);
         mainStage.addActor(backButton);
         mainStage.addActor(homeButton);
+
+        mainStage.addActor(tileInfoText);
+        mainStage.addActor(tileInfoBackButton);
     }
 
     @Override
@@ -221,17 +179,23 @@ public class GameplayScreen2 extends ScreenBeta {
         if(tapTime > 0.32f)
             return false;
 
+        tileInfoText.setVisible(true);
+        tileInfoBackButton.setVisible(true);
         Tile test = gameMapTest.screenSpaceCoordinatesToTile(screenX,screenY);
-        buildiumLabel.setText("Buildium Available: "+ test.buildium);
-        goldLabel.setText("Gold Available: "+ test.gold);
-
+        tileInfoText.setText("Owner: Player " +  test.playerThatOwns
+                + "\nBuildium: " +  test.buildium
+                + "\nGold: " + test.gold
+                + "\nDefenders: " + test.defenders
+                + "\nAttckers: " + test.attackers
+                + "\nDefensive bonus: " + test.defensiveValue );
+        tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
         return false;
     }
 
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer){
-        
+
         gameMapTest.scrollCamera(tapX-screenX,tapY-screenY);
         tapX =screenX;
         tapY = screenY;
