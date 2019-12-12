@@ -1,4 +1,4 @@
-package com.mygdx.game.Map;
+package com.CoderDroids.MassDroids.Map;
 
 public class Tile
 {

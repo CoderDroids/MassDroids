@@ -1,4 +1,4 @@
-package com.mygdx.game.base;
+package com.CoderDroids.MassDroids.base;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

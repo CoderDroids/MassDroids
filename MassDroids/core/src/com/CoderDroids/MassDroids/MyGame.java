@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.CoderDroids.MassDroids;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.base.GameBeta;
-import com.mygdx.game.screen.SplashScreen;
+import com.CoderDroids.MassDroids.base.GameBeta;
+import com.CoderDroids.MassDroids.screen.SplashScreen;
 
 public class MyGame extends GameBeta {
 
