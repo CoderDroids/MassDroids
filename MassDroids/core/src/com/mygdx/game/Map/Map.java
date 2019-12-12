@@ -14,14 +14,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Map.Tile;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+
 
 public class Map extends ActorBeta {
 
-    int mapWidth = 22; //number of tiles to each axis
-    int mapHeight = 40;
+    int mapWidth = 15; //number of tiles to each axis
+    int mapHeight = 20;
     int cameraX =0; //camera coordinates
     int cameraY =0;
-    int mapScale = 6; //visual zoom feature
+    int mapScale = 7; //visual zoom feature
 
 
     FrameBuffer m_fbo;
@@ -48,17 +50,29 @@ public class Map extends ActorBeta {
         {
             Tile testTile = new Tile();
             testTile.tileType = 36;
+            testTile.playerThatOwns = 0;
             testTile.buildium = 12;
             testTile.gold = 3;
+            testTile.attackers =0;
+            testTile.defenders =0;
+            testTile.defensiveValue =0;
             mapTiles.add(testTile);
         }
-        mapTiles.get(24).tileType = 5;
-        mapTiles.get(24).playerThatOwns = 1;
-        mapTiles.get(24).gold = 10;
-        mapTiles.get(24).buildium = 50;
-        mapTiles.get(24).defenders = 5;
-        mapTiles.get(24).attackers = 1;
-        mapTiles.get(24).defensiveValue = 2;
+        getTile2D(2,2).tileType = 5;
+        getTile2D(2,2).playerThatOwns = 1;
+        getTile2D(2,2).gold = 10;
+        getTile2D(2,2).buildium = 50;
+        getTile2D(2,2).defenders = 5;
+        getTile2D(2,2).attackers = 1;
+        getTile2D(2,2).defensiveValue = 2;
+
+        getTile2D(13,18).tileType = 0;
+        getTile2D(13,18).playerThatOwns = 2;
+        getTile2D(13,18).gold = 10;
+        getTile2D(13,18).buildium = 50;
+        getTile2D(13,18).defenders = 5;
+        getTile2D(13,18).attackers = 1;
+        getTile2D(13,18).defensiveValue = 2;
 
         //mapTiles.get(4).tileType = 0;
 
@@ -132,4 +146,15 @@ public class Map extends ActorBeta {
         return mapTiles.get(mapWidth * y + x);
     }
 
+    public void scrollCamera(int x,int y)
+    {
+        cameraX = MathUtils.clamp(cameraX +x,0,(int)(16* mapWidth*mapScale)-WIDTH);
+        cameraY = MathUtils.clamp(cameraY +y,0,(int)(16* mapHeight*mapScale)-HEIGHT);
+    }
+
+    public void setCamera(int x,int y)
+    {
+        cameraX = MathUtils.clamp(x,0,(int)(16* mapWidth*mapScale)-WIDTH);
+        cameraY = MathUtils.clamp(y,0,(int)(16* mapHeight*mapScale)-HEIGHT);
+    }
 }
