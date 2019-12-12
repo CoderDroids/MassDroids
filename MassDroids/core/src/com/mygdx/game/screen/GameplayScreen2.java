@@ -40,6 +40,10 @@ public class GameplayScreen2 extends ScreenBeta {
 
     Map gameMapTest;
 
+    int tapX,tapY;
+    float tapTime;
+    boolean tapDown;
+
     @Override
     public void initialize() {
         ActorBeta.setWorldBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -189,6 +193,8 @@ public class GameplayScreen2 extends ScreenBeta {
     public void update(float dt) {
         //buildiumLabel.setText("Buildium Available: "+ buildium);
         //goldLabel.setText("Gold Available: "+ gold);
+        if(tapDown)
+            tapTime+=dt;
 
     }
 
@@ -201,13 +207,34 @@ public class GameplayScreen2 extends ScreenBeta {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
+        tapX = screenX;
+        tapY = screenY;
+        tapDown = true;
+        tapTime = 0.0f;
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+
+        tapDown = false;
+        if(tapTime > 0.32f)
+            return false;
+
         Tile test = gameMapTest.screenSpaceCoordinatesToTile(screenX,screenY);
-
         buildiumLabel.setText("Buildium Available: "+ test.buildium);
-        //buildiumLabel.setText(screenX);
         goldLabel.setText("Gold Available: "+ test.gold);
-        //goldLabel.setText(screenY);
 
+        return false;
+    }
+
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer){
+        
+        gameMapTest.scrollCamera(tapX-screenX,tapY-screenY);
+        tapX =screenX;
+        tapY = screenY;
         return false;
     }
 

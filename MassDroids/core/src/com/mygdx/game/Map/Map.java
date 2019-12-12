@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Map.Tile;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+
 
 public class Map extends ActorBeta {
 
@@ -132,4 +134,15 @@ public class Map extends ActorBeta {
         return mapTiles.get(mapWidth * y + x);
     }
 
+    public void scrollCamera(int x,int y)
+    {
+        cameraX = MathUtils.clamp(cameraX +x,0,(int)(16* mapWidth*mapScale)-WIDTH);
+        cameraY = MathUtils.clamp(cameraY +y,0,(int)(16* mapHeight*mapScale)-HEIGHT);
+    }
+
+    public void setCamera(int x,int y)
+    {
+        cameraX = MathUtils.clamp(x,0,(int)(16* mapWidth*mapScale)-WIDTH);
+        cameraY = MathUtils.clamp(y,0,(int)(16* mapHeight*mapScale)-HEIGHT);
+    }
 }
