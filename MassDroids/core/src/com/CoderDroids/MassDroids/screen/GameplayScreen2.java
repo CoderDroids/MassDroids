@@ -1,5 +1,6 @@
 package com.CoderDroids.MassDroids.screen;
 
+import com.CoderDroids.MassDroids.game.GameplayManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -32,6 +33,7 @@ public class GameplayScreen2 extends ScreenBeta {
     TextButton homeButton;
     TextButton mainMenuButton;
     TextButton backButton;
+    TextButton endTurnButton;
     TextButton BuildAttackersBuildiumButton;
     TextButton BuildDefendersBuildiumButton;
     TextButton BuildAttackersGoldButton;
@@ -123,6 +125,19 @@ public class GameplayScreen2 extends ScreenBeta {
                                    }
                                }
         );
+
+        endTurnButton = new TextButton("End Turn", skin);
+        endTurnButton.setSize(400, 200 );
+        endTurnButton.setPosition(0,200);
+        endTurnButton.getLabel().setFontScale(3.0f);
+        endTurnButton.addListener(new ClickListener(){
+               @Override
+               public void clicked(InputEvent event, float x, float y) {
+                   GameplayManager.getInstance().takeTurn();
+               }
+           }
+        );
+
 
 //-------------Build options--------------//
 
@@ -226,17 +241,18 @@ public class GameplayScreen2 extends ScreenBeta {
         );
         // end example
 
-        mainStage.addActor(buildiumLabel);
-        mainStage.addActor(goldLabel);
-        mainStage.addActor(mainMenuButton);
-        mainStage.addActor(backButton);
-        mainStage.addActor(homeButton);
-        mainStage.addActor(BuildiumCostLabel);
-        mainStage.addActor(GoldCostLabel);
-        mainStage.addActor(BuildAttackersBuildiumButton);
-        mainStage.addActor(BuildDefendersBuildiumButton);
-        mainStage.addActor(BuildAttackersGoldButton);
-        mainStage.addActor(BuildDefendersGoldButton);
+        uiStage.addActor(buildiumLabel);
+        uiStage.addActor(goldLabel);
+        uiStage.addActor(mainMenuButton);
+        uiStage.addActor(backButton);
+        uiStage.addActor(homeButton);
+        uiStage.addActor(endTurnButton);
+        uiStage.addActor(BuildiumCostLabel);
+        uiStage.addActor(GoldCostLabel);
+        uiStage.addActor(BuildAttackersBuildiumButton);
+        uiStage.addActor(BuildDefendersBuildiumButton);
+        uiStage.addActor(BuildAttackersGoldButton);
+        uiStage.addActor(BuildDefendersGoldButton);
 
         mainStage.addActor(tileInfoText);
         mainStage.addActor(tileInfoBackButton);
