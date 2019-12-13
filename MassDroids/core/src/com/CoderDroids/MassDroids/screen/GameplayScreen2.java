@@ -346,8 +346,9 @@ public class GameplayScreen2 extends ScreenBeta {
             currentTile = test;
             currentTileSelected = true;
         }
+        //test.playerThatOwns != 0
 
-        if(test.playerThatOwns != 0) {
+        if(test.tileType != 36) {
             addStage(infoPopupStage);
             tileInfoText.setVisible(true);
             tileInfoText.setText("Owner: Player " + test.playerThatOwns
@@ -356,6 +357,7 @@ public class GameplayScreen2 extends ScreenBeta {
                     + "\nDefenders: " + test.defenders
                     + "\nAttckers: " + test.attackers
                     + "\nDefensive bonus: " + test.defensiveValue);
+                    //+ "\nTile Type: " + test.tileType);
             tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
             tileInfoText.setFontScale(2.0f);
 
