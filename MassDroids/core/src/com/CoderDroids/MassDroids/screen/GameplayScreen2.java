@@ -346,8 +346,9 @@ public class GameplayScreen2 extends ScreenBeta {
             currentTile = test;
             currentTileSelected = true;
         }
+        //test.playerThatOwns != 0
 
-        if(test.playerThatOwns != 0) {
+        if(test.tileType != 36) {
             addStage(infoPopupStage);
             tileInfoText.setVisible(true);
             tileInfoText.setText("Owner: Player " + test.playerThatOwns
