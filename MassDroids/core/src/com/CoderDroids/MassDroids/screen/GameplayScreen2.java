@@ -2,6 +2,8 @@ package com.CoderDroids.MassDroids.screen;
 
 import com.CoderDroids.MassDroids.game.GameplayManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -60,11 +62,16 @@ public class GameplayScreen2 extends ScreenBeta {
     float tapTime;
     boolean tapDown;
 
+    Preferences optionPrefs;
+
     @Override
     public void initialize() {
         ActorBeta.setWorldBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
         Skin skinWithBg = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
+        optionPrefs = Gdx.app.getPreferences("OptionPrefs");
+        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
+
 
         gameMapTest = new Map(mainStage);
         //Tile test = new Tile();
@@ -96,9 +103,12 @@ public class GameplayScreen2 extends ScreenBeta {
         homeButton.addListener(new ClickListener(){
                                      @Override
                                      public void clicked(InputEvent event, float x, float y) {
+                                        if( optionPrefs.getBoolean("Option.Effects", true))
+                                             click.play(1.0f);
                                         mainMenuButton.setVisible(true);
                                         backButton.setVisible(true);
                                         hideInfoPopup();
+
                                      }
                                  }
         );
@@ -111,6 +121,8 @@ public class GameplayScreen2 extends ScreenBeta {
         mainMenuButton.addListener(new ClickListener(){
                                        @Override
                                        public void clicked(InputEvent event, float x, float y) {
+                                           if( optionPrefs.getBoolean("Option.Effects", true))
+                                               click.play(1.0f);
                                            mainGame.setScreen( new MainMenuScreen(mainGame) );
                                        }
                                    }
@@ -124,6 +136,8 @@ public class GameplayScreen2 extends ScreenBeta {
         backButton.addListener(new ClickListener(){
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
+                                       if( optionPrefs.getBoolean("Option.Effects", true))
+                                           click.play(1.0f);
                                        mainMenuButton.setVisible(false);
                                        backButton.setVisible(false);
                                        hideInfoPopup();
@@ -138,6 +152,9 @@ public class GameplayScreen2 extends ScreenBeta {
         endTurnButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
+
+                     if( optionPrefs.getBoolean("Option.Effects", true))
+                       click.play(1.0f);
                    onTakeTurn();
                    hideInfoPopup();
                }
@@ -154,6 +171,8 @@ public class GameplayScreen2 extends ScreenBeta {
         BuildAttackersBuildiumButton.addListener(new ClickListener(){
                                                      @Override
                                                      public void clicked(InputEvent event, float x, float y) {
+                                                         if( optionPrefs.getBoolean("Option.Effects", true))
+                                                             click.play(1.0f);
                                                          BuildDroids(1,1,20);
                                                      }
                                                  }
@@ -166,6 +185,8 @@ public class GameplayScreen2 extends ScreenBeta {
         BuildDefendersBuildiumButton.addListener(new ClickListener(){
                                                      @Override
                                                      public void clicked(InputEvent event, float x, float y) {
+                                                         if( optionPrefs.getBoolean("Option.Effects", true))
+                                                             click.play(1.0f);
                                                          BuildDroids(2,1,20);
                                                      }
                                                  }
@@ -178,6 +199,8 @@ public class GameplayScreen2 extends ScreenBeta {
         BuildAttackersGoldButton.addListener(new ClickListener(){
                                                  @Override
                                                  public void clicked(InputEvent event, float x, float y) {
+                                                     if( optionPrefs.getBoolean("Option.Effects", true))
+                                                         click.play(1.0f);
                                                      BuildDroids(1,2,5);
                                                  }
                                              }
@@ -190,6 +213,8 @@ public class GameplayScreen2 extends ScreenBeta {
         BuildDefendersGoldButton.addListener(new ClickListener(){
                                                  @Override
                                                  public void clicked(InputEvent event, float x, float y) {
+                                                     if( optionPrefs.getBoolean("Option.Effects", true))
+                                                         click.play(1.0f);
                                                      BuildDroids(2,2,5);
                                                  }
                                              }
@@ -232,6 +257,9 @@ public class GameplayScreen2 extends ScreenBeta {
         tileInfoBackButton.addListener(new ClickListener(){
                                @Override
                                public void clicked(InputEvent event, float x, float y) {
+
+                                   if( optionPrefs.getBoolean("Option.Effects", true))
+                                     click.play(1.0f);
                                    hideInfoPopup();
                                }
                            }
