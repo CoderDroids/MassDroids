@@ -24,8 +24,14 @@ public class TileSettings
         setTile(36,12,3,0,0,0,0); //grass
         setTile(2,50,20,2,3,0,0); //mountain
         setTile(6,10,50,0,0,0,0); //lake
-        setTile(0,50,20,3,5,1,1); //player base
-        setTile(5,50,20,3,5,1,2); //player base
+        setTile(5,50,20,3,5,1,1); //player base
+        setTile(0,50,20,3,5,1,2); //player base
+        setTile(7,50,20,3,5,1,3); //player base
+        setTile(26,50,20,3,5,1,4); //player base
+        setTile(28,50,20,3,5,1,5); //player base
+        setTile(30,50,20,3,5,1,6); //player base
+        setTile(32,50,20,3,5,1,7); //player base
+
 
         setTile(46,0,0,-1,0,0,0); //river
         setTile(45,0,0,-1,0,0,0); //river

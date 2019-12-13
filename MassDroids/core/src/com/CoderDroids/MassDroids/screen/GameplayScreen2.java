@@ -49,6 +49,9 @@ public class GameplayScreen2 extends ScreenBeta {
 
 
     Stage infoPopupStage;
+    boolean isShowingInfoPopup = false;
+    Stage attackPopupStage;
+    boolean isShowingAttackPopup = false;
 
     float buildBuildiumCost;
     float buildGoldCost;
@@ -57,7 +60,7 @@ public class GameplayScreen2 extends ScreenBeta {
 
     Tile currentTile;
     boolean currentTileSelected;
-    boolean isShowingInfoPopup = false;
+
 
     int tapX,tapY;
     float tapTime;
@@ -97,14 +100,14 @@ public class GameplayScreen2 extends ScreenBeta {
         attackerLabel.setAlignment(Align.center);
         attackerLabel.setWrap(true);
         attackerLabel.setSize(Gdx.graphics.getWidth()/2, 150);
-        attackerLabel.setPosition(0, Gdx.graphics.getHeight() - attackerLabel.getHeight() * 2);
+        attackerLabel.setPosition(0, Gdx.graphics.getHeight() - attackerLabel.getHeight() * 1.5f);
 
         defenderLabel = new Label("Defender : ", skin);
         defenderLabel.setFontScale(3);
         defenderLabel.setAlignment(Align.center);
         defenderLabel.setWrap(true);
         defenderLabel.setSize(Gdx.graphics.getWidth()/2, 150);
-        defenderLabel.setPosition(attackerLabel.getWidth(), Gdx.graphics.getHeight() - defenderLabel.getHeight() * 2) ;
+        defenderLabel.setPosition(attackerLabel.getWidth(), Gdx.graphics.getHeight() - defenderLabel.getHeight() * 1.5f) ;
 
 
         homeButton = new TextButton("Options", skin);
@@ -118,7 +121,7 @@ public class GameplayScreen2 extends ScreenBeta {
                                              SoundManager.getInstance().click.play(1.0f);
                                         mainMenuButton.setVisible(true);
                                         backButton.setVisible(true);
-                                        hideInfoPopup();
+                                         hideAllPopup();
 
                                      }
                                  }
@@ -151,7 +154,7 @@ public class GameplayScreen2 extends ScreenBeta {
                                            SoundManager.getInstance().click.play(1.0f);
                                        mainMenuButton.setVisible(false);
                                        backButton.setVisible(false);
-                                       hideInfoPopup();
+                                       hideAllPopup();
                                    }
                                }
         );
@@ -167,7 +170,7 @@ public class GameplayScreen2 extends ScreenBeta {
                      if( optionPrefs.getBoolean("Option.Effects", true))
                          SoundManager.getInstance().click.play(1.0f);
                    onTakeTurn();
-                   hideInfoPopup();
+                   hideAllPopup();
                }
            }
         );
@@ -273,7 +276,7 @@ public class GameplayScreen2 extends ScreenBeta {
 
                                    if( optionPrefs.getBoolean("Option.Effects", true))
                                        SoundManager.getInstance().click.play(1.0f);
-                                   hideInfoPopup();
+                                   hideAllPopup();
                                }
                            }
         );
@@ -288,6 +291,8 @@ public class GameplayScreen2 extends ScreenBeta {
         infoPopupStage.addActor(BuildiumCostLabel);
         infoPopupStage.addActor(GoldCostLabel);
         //addStage(infoPopupStage);
+
+        attackPopupStage = new AttackStage();
 
         uiStage.addActor(buildiumLabel);
         uiStage.addActor(goldLabel);
@@ -348,8 +353,7 @@ public class GameplayScreen2 extends ScreenBeta {
         }
         //test.playerThatOwns != 0
 
-        if(test.tileType != 36) {
-            addStage(infoPopupStage);
+        if(test.playerThatOwns > 0) {
             tileInfoText.setVisible(true);
             tileInfoText.setText("Owner: Player " + test.playerThatOwns
                     + "\nBuildium: " + test.buildium
@@ -361,10 +365,13 @@ public class GameplayScreen2 extends ScreenBeta {
             tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
             tileInfoText.setFontScale(2.0f);
 
-
+            if( test.playerThatOwns == 1 )
+                showInfoPopup();
+            else
+                showAttackPopup();
         }else{
             tileInfoText.setVisible(false);
-            removeStage(infoPopupStage);
+            hideAllPopup();
         }
 
         return false;
@@ -391,7 +398,7 @@ public class GameplayScreen2 extends ScreenBeta {
             numDefenders = GameplayManager.getInstance().player.numDefenders;
         }
 
-        hideInfoPopup();
+        hideAllPopup();
         currentTileSelected = false;
     }
 
@@ -420,8 +427,35 @@ public class GameplayScreen2 extends ScreenBeta {
 
     void hideInfoPopup()
     {
+        if( isShowingAttackPopup )
+            hideAttackPopup();
+
         removeStage(infoPopupStage);
         isShowingInfoPopup = false;
+
     }
 
+    void hideAttackPopup()
+    {
+        removeStage( attackPopupStage );
+        isShowingAttackPopup = false;
+    }
+
+    void hideAllPopup()
+    {
+        hideInfoPopup();
+        hideAttackPopup();
+    }
+
+    void showAttackPopup()
+    {
+        if(isShowingInfoPopup)
+            hideInfoPopup();
+
+        if( !isShowingAttackPopup )
+        {
+            addStage( attackPopupStage );
+            isShowingAttackPopup = true;
+        }
+    }
 }

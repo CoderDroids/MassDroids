@@ -59,8 +59,13 @@ public class Map extends ActorBeta {
         {
             addTile(mapTiles.get(i),36);
         }
-        addTile(getTile2D(2,2),5); //player 1 base
-        addTile(getTile2D(13,18),0);//player 2 base
+        addTile(getTile2D(2,2),5);  //player 1 base
+        addTile(getTile2D(12,17),0);//player 2 base
+        addTile(getTile2D(7,4),7);  //player 3 base
+        addTile(getTile2D(2,11),26);//player 4 base
+        addTile(getTile2D(11,9),28);//player 5 base
+        addTile(getTile2D(7,14),30);//player 6 base
+        addTile(getTile2D(4,7),32);//player 7 base
 
         addTile(getTile2D(7,10),6);// lake
         addTile(getTile2D(5,5),2);// mountain
