@@ -325,14 +325,24 @@ public class GameplayScreen2 extends ScreenBeta {
             currentTileSelected = true;
         }
 
-        tileInfoText.setText("Owner: Player " +  test.playerThatOwns
-                + "\nBuildium: " +  test.buildium
-                + "\nGold: " + test.gold
-                + "\nDefenders: " + test.defenders
-                + "\nAttckers: " + test.attackers
-                + "\nDefensive bonus: " + test.defensiveValue );
-        tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
-        tileInfoText.setFontScale(2.0f);
+        if(test.playerThatOwns != 0) {
+            addStage(infoPopupStage);
+            tileInfoText.setVisible(true);
+            tileInfoText.setText("Owner: Player " + test.playerThatOwns
+                    + "\nBuildium: " + test.buildium
+                    + "\nGold: " + test.gold
+                    + "\nDefenders: " + test.defenders
+                    + "\nAttckers: " + test.attackers
+                    + "\nDefensive bonus: " + test.defensiveValue);
+            tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
+            tileInfoText.setFontScale(2.0f);
+
+
+        }else{
+            tileInfoText.setVisible(false);
+            removeStage(infoPopupStage);
+        }
+
         return false;
     }
 
