@@ -63,8 +63,10 @@ public class OptionMenuScreen extends ScreenBeta {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 optionPrefs.putBoolean("Option.Music", musicButton.isChecked() );
-                if( optionPrefs.getBoolean("Option.Effects", true))
+                optionPrefs.flush();
+                if( optionPrefs.getBoolean("Option.Effects", true)) {
                     click.play(1.0f);
+                }
                 if(musicButton.isChecked()) {
                     backgroundMusic.play();
                 }
@@ -86,8 +88,10 @@ public class OptionMenuScreen extends ScreenBeta {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 optionPrefs.putBoolean("Option.Effects", effectButton.isChecked() );
-                if( optionPrefs.getBoolean("Option.Effects", true))
+                optionPrefs.flush();
+                if( optionPrefs.getBoolean("Option.Effects", true)) {
                     click.play(1.0f);
+                }
             }
         });
 
