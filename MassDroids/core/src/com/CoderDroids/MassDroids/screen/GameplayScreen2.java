@@ -1,4 +1,4 @@
-package com.mygdx.game.screen;
+package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.Map.Tile;
-import com.mygdx.game.base.ActorBeta;
-import com.mygdx.game.base.GameBeta;
-import com.mygdx.game.base.ScreenBeta;
-import com.mygdx.game.Map.Map;
+import com.CoderDroids.MassDroids.Map.Tile;
+import com.CoderDroids.MassDroids.base.ActorBeta;
+import com.CoderDroids.MassDroids.base.GameBeta;
+import com.CoderDroids.MassDroids.base.ScreenBeta;
+import com.CoderDroids.MassDroids.Map.Map;
 
 public class GameplayScreen2 extends ScreenBeta {
 
@@ -32,6 +32,12 @@ public class GameplayScreen2 extends ScreenBeta {
     TextButton homeButton;
     TextButton mainMenuButton;
     TextButton backButton;
+    TextButton BuildAttackersBuildiumButton;
+    TextButton BuildDefendersBuildiumButton;
+    TextButton BuildAttackersGoldButton;
+    TextButton BuildDefendersGoldButton;
+    Label BuildiumCostLabel;
+    Label GoldCostLabel;
 
 
     Label tileInfoText;
@@ -41,6 +47,9 @@ public class GameplayScreen2 extends ScreenBeta {
     float buildGoldCost;
 
     Map gameMapTest;
+
+    Tile currentTile;
+    boolean currentTileSelected;
 
     int tapX,tapY;
     float tapTime;
@@ -115,7 +124,75 @@ public class GameplayScreen2 extends ScreenBeta {
                                }
         );
 
+//-------------Build options--------------//
 
+        BuildAttackersBuildiumButton = new TextButton("Build Attackers", skin);
+        BuildAttackersBuildiumButton.setSize(550, 200 );
+        BuildAttackersBuildiumButton.setPosition(Gdx.graphics.getWidth()/2 - BuildAttackersBuildiumButton.getWidth(), Gdx.graphics.getHeight()/2);
+        BuildAttackersBuildiumButton.getLabel().setFontScale(2.0f);
+        BuildAttackersBuildiumButton.setVisible(false);
+        BuildAttackersBuildiumButton.addListener(new ClickListener(){
+                                                     @Override
+                                                     public void clicked(InputEvent event, float x, float y) {
+                                                         BuildDroids(1,1,20);
+                                                     }
+                                                 }
+        );
+
+        BuildDefendersBuildiumButton = new TextButton("Build Defenders", skin);
+        BuildDefendersBuildiumButton.setSize(550, 200 );
+        BuildDefendersBuildiumButton.setPosition(Gdx.graphics.getWidth()/2 - BuildDefendersBuildiumButton.getWidth(), Gdx.graphics.getHeight()/2 - BuildAttackersBuildiumButton.getHeight() );
+        BuildDefendersBuildiumButton.getLabel().setFontScale(2.0f);
+        BuildDefendersBuildiumButton.setVisible(false);
+        BuildDefendersBuildiumButton.addListener(new ClickListener(){
+                                                     @Override
+                                                     public void clicked(InputEvent event, float x, float y) {
+                                                         BuildDroids(2,1,20);
+                                                     }
+                                                 }
+        );
+
+        BuildAttackersGoldButton = new TextButton("Build Attackers", skin);
+        BuildAttackersGoldButton.setSize(550, 200 );
+        BuildAttackersGoldButton.setPosition(Gdx.graphics.getWidth()/2 , Gdx.graphics.getHeight()/2 );
+        BuildAttackersGoldButton.getLabel().setFontScale(2.0f);
+        BuildAttackersGoldButton.setVisible(false);
+        BuildAttackersGoldButton.addListener(new ClickListener(){
+                                                 @Override
+                                                 public void clicked(InputEvent event, float x, float y) {
+                                                     BuildDroids(1,2,5);
+                                                 }
+                                             }
+        );
+
+        BuildDefendersGoldButton = new TextButton("Build Defenders", skin);
+        BuildDefendersGoldButton.setSize(550, 200 );
+        BuildDefendersGoldButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2 - BuildAttackersGoldButton.getHeight());
+        BuildDefendersGoldButton.getLabel().setFontScale(2.0f);
+        BuildDefendersGoldButton.setVisible(false);
+        BuildDefendersGoldButton.addListener(new ClickListener(){
+                                                 @Override
+                                                 public void clicked(InputEvent event, float x, float y) {
+                                                     BuildDroids(2,2,5);
+                                                 }
+                                             }
+        );
+
+        BuildiumCostLabel = new Label("Buildium", skin);
+        BuildiumCostLabel.setFontScale(3);
+        BuildiumCostLabel.setAlignment(Align.center);
+        BuildiumCostLabel.setWrap(true);
+        BuildiumCostLabel.setSize(Gdx.graphics.getWidth()/2, 150);
+        BuildiumCostLabel.setPosition(BuildAttackersBuildiumButton.getX(), BuildAttackersBuildiumButton.getY() + BuildiumCostLabel.getHeight());
+        BuildiumCostLabel.setVisible(false);
+
+        GoldCostLabel = new Label("Gold", skin);
+        GoldCostLabel.setFontScale(3);
+        GoldCostLabel.setAlignment(Align.center);
+        GoldCostLabel.setWrap(true);
+        GoldCostLabel.setSize(Gdx.graphics.getWidth()/2, 150);
+        GoldCostLabel.setPosition(BuildAttackersGoldButton.getX(), BuildAttackersGoldButton.getY() + GoldCostLabel.getHeight());
+        GoldCostLabel.setVisible(false);
 //--------------Example-------------------//
 
 
@@ -154,6 +231,12 @@ public class GameplayScreen2 extends ScreenBeta {
         mainStage.addActor(mainMenuButton);
         mainStage.addActor(backButton);
         mainStage.addActor(homeButton);
+        mainStage.addActor(BuildiumCostLabel);
+        mainStage.addActor(GoldCostLabel);
+        mainStage.addActor(BuildAttackersBuildiumButton);
+        mainStage.addActor(BuildDefendersBuildiumButton);
+        mainStage.addActor(BuildAttackersGoldButton);
+        mainStage.addActor(BuildDefendersGoldButton);
 
         mainStage.addActor(tileInfoText);
         mainStage.addActor(tileInfoBackButton);
@@ -161,8 +244,8 @@ public class GameplayScreen2 extends ScreenBeta {
 
     @Override
     public void update(float dt) {
-        //buildiumLabel.setText("Buildium Available: "+ buildium);
-        //goldLabel.setText("Gold Available: "+ gold);
+        buildiumLabel.setText("Buildium Available: "+ buildium);
+        goldLabel.setText("Gold Available: "+ gold);
         if(tapDown)
             tapTime+=dt;
 
@@ -191,9 +274,22 @@ public class GameplayScreen2 extends ScreenBeta {
         if(tapTime > 0.32f)
             return false;
 
+        BuildAttackersBuildiumButton.setVisible(true);
+        BuildDefendersBuildiumButton.setVisible(true);
+        BuildAttackersGoldButton.setVisible(true);
+        BuildDefendersGoldButton.setVisible(true);
+        BuildiumCostLabel.setVisible(true);
+        GoldCostLabel.setVisible(true);
+
         tileInfoText.setVisible(true);
         tileInfoBackButton.setVisible(true);
         Tile test = gameMapTest.screenSpaceCoordinatesToTile(screenX,screenY);
+        if(!currentTileSelected)
+        {
+            currentTile = test;
+            currentTileSelected = true;
+        }
+
         tileInfoText.setText("Owner: Player " +  test.playerThatOwns
                 + "\nBuildium: " +  test.buildium
                 + "\nGold: " + test.gold
@@ -201,6 +297,7 @@ public class GameplayScreen2 extends ScreenBeta {
                 + "\nAttckers: " + test.attackers
                 + "\nDefensive bonus: " + test.defensiveValue );
         tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
+        tileInfoText.setFontScale(2.0f);
         return false;
     }
 
@@ -212,6 +309,48 @@ public class GameplayScreen2 extends ScreenBeta {
         tapX =screenX;
         tapY = screenY;
         return false;
+    }
+
+    public void BuildDroids(int TypeOfDroid, int CurrencyTypeUsed, int Cost)
+    {/*
+    TypeOfDroid
+        1 - Attacker
+        2 - Defender
+
+    CurrencyTypeUsed
+        1 - Buildium
+        2 - Gold
+
+    */
+        if(CurrencyTypeUsed == 1)
+        {
+            if(buildium >= Cost)
+                buildium -= Cost;
+            else
+                return;
+        }
+        else if (CurrencyTypeUsed == 2)
+        {
+            if(gold >= Cost)
+                gold -= Cost;
+            else
+                return;
+        }
+
+        if(TypeOfDroid == 1)
+            currentTile.attackers += 1;
+        else if (TypeOfDroid == 2)
+            currentTile.defenders += 1;
+
+        tileInfoText.setVisible(false);
+        tileInfoBackButton.setVisible(false);
+        BuildAttackersBuildiumButton.setVisible(false);
+        BuildDefendersBuildiumButton.setVisible(false);
+        BuildAttackersGoldButton.setVisible(false);
+        BuildDefendersGoldButton.setVisible(false);
+        BuildiumCostLabel.setVisible(false);
+        GoldCostLabel.setVisible(false);
+        currentTileSelected = false;
     }
 
 }

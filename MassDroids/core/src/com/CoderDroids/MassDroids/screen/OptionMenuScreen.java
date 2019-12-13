@@ -1,10 +1,9 @@
-package com.mygdx.game.screen;
+package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -14,11 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
-import com.mygdx.game.MyGame;
-import com.mygdx.game.base.ScreenBeta;
-import com.mygdx.game.base.GameBeta;
-
-import javax.swing.GroupLayout;
+import com.CoderDroids.MassDroids.MyGame;
+import com.CoderDroids.MassDroids.base.ScreenBeta;
+import com.CoderDroids.MassDroids.base.GameBeta;
 
 public class OptionMenuScreen extends ScreenBeta {
 

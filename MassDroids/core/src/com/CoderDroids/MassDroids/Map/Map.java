@@ -1,4 +1,4 @@
-package com.mygdx.game.Map;
+package com.CoderDroids.MassDroids.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -7,15 +7,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
-import com.mygdx.game.base.ActorBeta;
+import com.CoderDroids.MassDroids.base.ActorBeta;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Map.Tile;
-import com.mygdx.game.Map.TileSettings;
+import com.CoderDroids.MassDroids.Map.Tile;
+import com.CoderDroids.MassDroids.Map.TileSettings;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.MathUtils;
+
+import java.util.Random;
 
 
 public class Map extends ActorBeta {

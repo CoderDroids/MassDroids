@@ -1,4 +1,4 @@
-package com.mygdx.game.screen;
+package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.base.GameBeta;
-import com.mygdx.game.base.ScreenBeta;
+import com.CoderDroids.MassDroids.base.GameBeta;
+import com.CoderDroids.MassDroids.base.ScreenBeta;
 
 public class ExitScreen extends ScreenBeta {
 

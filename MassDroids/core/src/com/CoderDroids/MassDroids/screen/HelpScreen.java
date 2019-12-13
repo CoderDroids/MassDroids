@@ -1,15 +1,15 @@
-package com.mygdx.game.screen;
+package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.base.GameBeta;
-import com.mygdx.game.base.ScreenBeta;
+import com.CoderDroids.MassDroids.base.GameBeta;
+import com.CoderDroids.MassDroids.base.ScreenBeta;
 
-import static com.mygdx.game.MyGame.SCREEN_HEIGHT;
-import static com.mygdx.game.MyGame.SCREEN_WIDTH;
+import static com.CoderDroids.MassDroids.MyGame.SCREEN_HEIGHT;
+import static com.CoderDroids.MassDroids.MyGame.SCREEN_WIDTH;
 
 public class HelpScreen extends ScreenBeta {
 

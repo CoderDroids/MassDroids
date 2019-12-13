@@ -1,7 +1,8 @@
-package com.mygdx.game.base;
 
+package com.CoderDroids.MassDroids.base;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Intersector.MinimumTranslationVector;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.math.Intersector.MinimumTranslationVector;
 
 /**
  *  Extend the Actor class to include graphics and collision detection.

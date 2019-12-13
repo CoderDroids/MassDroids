@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.CoderDroids.MassDroids;
 
 import android.os.Bundle;
 

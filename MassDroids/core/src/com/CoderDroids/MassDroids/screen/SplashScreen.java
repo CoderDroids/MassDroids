@@ -1,4 +1,4 @@
-package com.mygdx.game.screen;
+package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,13 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.MyGame;
-import com.mygdx.game.base.GameBeta;
-import com.mygdx.game.base.ScreenBeta;
-import com.mygdx.game.screen.MainMenuScreen;
+import com.CoderDroids.MassDroids.MyGame;
+import com.CoderDroids.MassDroids.base.GameBeta;
+import com.CoderDroids.MassDroids.base.ScreenBeta;
 
-import static com.mygdx.game.MyGame.SCREEN_WIDTH;
-import static com.mygdx.game.MyGame.SCREEN_HEIGHT;
+import static com.CoderDroids.MassDroids.MyGame.SCREEN_WIDTH;
+import static com.CoderDroids.MassDroids.MyGame.SCREEN_HEIGHT;
 
 public class SplashScreen extends ScreenBeta {
 
