@@ -236,6 +236,12 @@ public class GameplayScreen2 extends ScreenBeta {
                                public void clicked(InputEvent event, float x, float y) {
                                    tileInfoText.setVisible(false);
                                    tileInfoBackButton.setVisible(false);
+                                   BuildAttackersBuildiumButton.setVisible(false);
+                                   BuildDefendersBuildiumButton.setVisible(false);
+                                   BuildAttackersGoldButton.setVisible(false);
+                                   BuildDefendersGoldButton.setVisible(false);
+                                   BuildiumCostLabel.setVisible(false);
+                                   GoldCostLabel.setVisible(false);
                                }
                            }
         );
