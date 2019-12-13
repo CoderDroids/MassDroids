@@ -133,7 +133,7 @@ public class GameplayScreen2 extends ScreenBeta {
         endTurnButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
-                   GameplayManager.getInstance().takeTurn();
+                   onTakeTurn();
                }
            }
         );
@@ -373,6 +373,20 @@ public class GameplayScreen2 extends ScreenBeta {
         BuildiumCostLabel.setVisible(false);
         GoldCostLabel.setVisible(false);
         currentTileSelected = false;
+    }
+
+    void init()
+    {
+        buildium = GameplayManager.getInstance().player.buildium;
+        gold = GameplayManager.getInstance().player.gold;
+    }
+
+
+    void onTakeTurn()
+    {
+        GameplayManager.getInstance().takeTurn();
+        buildium = GameplayManager.getInstance().player.buildium;
+        gold = GameplayManager.getInstance().player.gold;
     }
 
 }
