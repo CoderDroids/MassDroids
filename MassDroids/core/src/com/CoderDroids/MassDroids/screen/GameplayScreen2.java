@@ -355,7 +355,8 @@ public class GameplayScreen2 extends ScreenBeta {
                     + "\nGold: " + test.gold
                     + "\nDefenders: " + test.defenders
                     + "\nAttckers: " + test.attackers
-                    + "\nDefensive bonus: " + test.defensiveValue);
+                    + "\nDefensive bonus: " + test.defensiveValue
+                    + "\nTile Type: " + test.tileType);
             tileInfoText.setPosition(Gdx.graphics.getWidth() - tileInfoText.getWidth(), 0 + tileInfoText.getHeight());
             tileInfoText.setFontScale(2.0f);
 

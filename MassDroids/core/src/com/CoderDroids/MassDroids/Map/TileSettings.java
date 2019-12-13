@@ -26,6 +26,17 @@ public class TileSettings
         setTile(6,10,50,0,0,0,0); //lake
         setTile(0,50,20,3,5,1,1); //player base
         setTile(5,50,20,3,5,1,2); //player base
+
+        setTile(46,0,0,-1,0,0,0); //river
+        setTile(45,0,0,-1,0,0,0); //river
+        setTile(51,0,0,-1,0,0,0); //river
+        setTile(78,0,0,-1,0,0,0); //river
+        setTile(79,0,0,-1,0,0,0); //river
+        setTile(85,0,0,-1,0,0,0); //river
+        setTile(83,0,0,-1,0,0,0); //river
+        setTile(44,0,0,-1,0,0,0); //river
+
+        setTile(104,0,20,2,0,0,0); //trees
     }
 
     private void setTile(int number, int buildium, int gold, int defensiveValue , int defenders , int attackers, int playerThatOwns)

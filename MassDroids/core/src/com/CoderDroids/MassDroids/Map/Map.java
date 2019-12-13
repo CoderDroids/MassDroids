@@ -66,6 +66,40 @@ public class Map extends ActorBeta {
         addTile(getTile2D(5,5),2);// mountain
         addTile(getTile2D(10,15),2);// mountain
 
+
+        addTile(getTile2D(0,8),46);// river
+        for(int i =1;i<10;i++)
+        {
+            addTile(getTile2D(i,8),45);
+        }
+        for(int i =5;i<14;i++)
+        {
+            addTile(getTile2D(i,12),45);
+        }
+        for(int i =9;i<12;i++)
+        {
+            addTile(getTile2D(9,i),51);
+            addTile(getTile2D(5,i),51);
+        }
+
+
+        addTile(getTile2D(9,12),78);
+        addTile(getTile2D(5,8),79);
+        addTile(getTile2D(9,8),85);
+        addTile(getTile2D(5,12),83);
+
+        addTile(getTile2D(14,12),44);
+        //river
+
+
+        for(int i =0;i<16;i++) {
+            addTile(getTile2D(10 + i%4, 2+i/4), 104);
+        }
+
+        for(int i =0;i<16;i++) {
+            addTile(getTile2D(2 + i%4, 15+i/4), 104);
+        }
+
         batch =  new SpriteBatch();
         m_fbo = new FrameBuffer(Pixmap.Format.RGB565, (int)(16* mapWidth*mapScale), (int)(16* mapHeight*mapScale), false);
         redrawMap();
