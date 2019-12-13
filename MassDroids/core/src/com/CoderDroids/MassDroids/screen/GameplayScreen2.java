@@ -41,7 +41,6 @@ public class GameplayScreen2 extends ScreenBeta {
     Label BuildiumCostLabel;
     Label GoldCostLabel;
 
-
     Label tileInfoText;
     TextButton tileInfoBackButton;
 
@@ -95,6 +94,14 @@ public class GameplayScreen2 extends ScreenBeta {
                                      public void clicked(InputEvent event, float x, float y) {
                                         mainMenuButton.setVisible(true);
                                         backButton.setVisible(true);
+                                         tileInfoText.setVisible(false);
+                                         tileInfoBackButton.setVisible(false);
+                                         BuildAttackersBuildiumButton.setVisible(false);
+                                         BuildDefendersBuildiumButton.setVisible(false);
+                                         BuildAttackersGoldButton.setVisible(false);
+                                         BuildDefendersGoldButton.setVisible(false);
+                                         BuildiumCostLabel.setVisible(false);
+                                         GoldCostLabel.setVisible(false);
                                      }
                                  }
         );
@@ -122,6 +129,14 @@ public class GameplayScreen2 extends ScreenBeta {
                                    public void clicked(InputEvent event, float x, float y) {
                                        mainMenuButton.setVisible(false);
                                        backButton.setVisible(false);
+                                       tileInfoText.setVisible(false);
+                                       tileInfoBackButton.setVisible(false);
+                                       BuildAttackersBuildiumButton.setVisible(false);
+                                       BuildDefendersBuildiumButton.setVisible(false);
+                                       BuildAttackersGoldButton.setVisible(false);
+                                       BuildDefendersGoldButton.setVisible(false);
+                                       BuildiumCostLabel.setVisible(false);
+                                       GoldCostLabel.setVisible(false);
                                    }
                                }
         );
@@ -134,6 +149,14 @@ public class GameplayScreen2 extends ScreenBeta {
                @Override
                public void clicked(InputEvent event, float x, float y) {
                    onTakeTurn();
+                   tileInfoText.setVisible(false);
+                   tileInfoBackButton.setVisible(false);
+                   BuildAttackersBuildiumButton.setVisible(false);
+                   BuildDefendersBuildiumButton.setVisible(false);
+                   BuildAttackersGoldButton.setVisible(false);
+                   BuildDefendersGoldButton.setVisible(false);
+                   BuildiumCostLabel.setVisible(false);
+                   GoldCostLabel.setVisible(false);
                }
            }
         );
