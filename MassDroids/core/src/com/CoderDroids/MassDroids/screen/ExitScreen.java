@@ -38,7 +38,8 @@ public class ExitScreen extends ScreenBeta {
 
         texture = new Texture(Gdx.files.internal("MassDroidsLogo.jpg"));
         image = new Image(texture);
-        image.setPosition(Gdx.graphics.getWidth()/2 - 325, Gdx.graphics.getHeight()/2 + 360);
+        image.setPosition(Gdx.graphics.getWidth()/2 - (texture.getWidth()/2) - 160, Gdx.graphics.getHeight()/2 + 360);
+        image.setScale(1.5f);
         label = new Label("Thank you for playing!", skin);
         label.setWrap(true);
         label.setFontScale(4);
@@ -46,6 +47,7 @@ public class ExitScreen extends ScreenBeta {
         label.setPosition(0, Gdx.graphics.getHeight()/2 - image.getImageHeight());
         button = new TextButton("Exit", skin);
         button.setSize(300, 200);
+        button.getLabel().setFontScale(3.5f);
         button.setPosition(Gdx.graphics.getWidth()/2-150, 400);
         button.addListener(new ClickListener(){
                                      @Override
