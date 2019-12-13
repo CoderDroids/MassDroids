@@ -1,6 +1,6 @@
-package com.mygdx.game.Map;
+package com.CoderDroids.MassDroids.Map;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Map.Tile;
+import com.CoderDroids.MassDroids.Map.Tile;
 
 public class TileSettings
 {
