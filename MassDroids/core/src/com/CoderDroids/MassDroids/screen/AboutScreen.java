@@ -1,5 +1,6 @@
 package com.CoderDroids.MassDroids.screen;
 
+import com.CoderDroids.MassDroids.Sound.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
@@ -20,7 +21,6 @@ public class AboutScreen extends ScreenBeta {
     }
 
     Preferences optionPrefs;
-    final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
     @Override
     public void initialize()
@@ -82,7 +82,7 @@ public class AboutScreen extends ScreenBeta {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         super.touchDown(screenX, screenY, pointer, button);
         if( optionPrefs.getBoolean("Option.Effects", true))
-            click.play(1.0f);
+            SoundManager.getInstance().click.play(1.0f);
         mainGame.setScreen( new MainMenuScreen(mainGame) );
         return true;
     }

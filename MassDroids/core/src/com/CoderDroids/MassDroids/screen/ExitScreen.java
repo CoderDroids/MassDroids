@@ -1,5 +1,6 @@
 package com.CoderDroids.MassDroids.screen;
 
+import com.CoderDroids.MassDroids.Sound.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
@@ -34,7 +35,6 @@ public class ExitScreen extends ScreenBeta {
     {
         skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
         optionPrefs = Gdx.app.getPreferences("OptionPrefs");
-        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
         texture = new Texture(Gdx.files.internal("MassDroidsLogo.jpg"));
         image = new Image(texture);
@@ -53,7 +53,7 @@ public class ExitScreen extends ScreenBeta {
                                      @Override
                                      public void clicked(InputEvent event, float x, float y) {
                                          if( optionPrefs.getBoolean("Option.Effects", true))
-                                             click.play(1.0f);
+                                             SoundManager.getInstance().click.play(1.0f);
                                          Gdx.app.exit();
                                      };
                                  }
