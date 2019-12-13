@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Map.Tile;
+import com.mygdx.game.Map.TileSettings;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
@@ -33,6 +34,7 @@ public class Map extends ActorBeta {
     static int WIDTH = Gdx.graphics.getWidth();
     static int HEIGHT = Gdx.graphics.getHeight();
     public Array<Tile> mapTiles = new Array<Tile>();
+    TileSettings tileMasterList = new TileSettings();
 
     public Map(Stage s) {
         super(0, 0, s);
@@ -43,60 +45,24 @@ public class Map extends ActorBeta {
             textureArray.add(new TextureRegion(loadedTexture, (i%8)*16, (i/8) *16, 16, 16));
         }
 
-        //exapmple usage
-        //note i will set all the values per tile type so the only thing that needs to be set here is the type
-        //it should be fine to randomly select from tiles to build map
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
-            Tile testTile = new Tile();
-            testTile.tileType = 36;
-            testTile.playerThatOwns = 0;
-            testTile.buildium = 12;
-            testTile.gold = 3;
-            testTile.attackers =0;
-            testTile.defenders =0;
-            testTile.defensiveValue =0;
-            mapTiles.add(testTile);
+            mapTiles.add(new Tile());
         }
-        getTile2D(2,2).tileType = 5;
-        getTile2D(2,2).playerThatOwns = 1;
-        getTile2D(2,2).gold = 10;
-        getTile2D(2,2).buildium = 50;
-        getTile2D(2,2).defenders = 5;
-        getTile2D(2,2).attackers = 1;
-        getTile2D(2,2).defensiveValue = 2;
+        for (int i =0;i<mapWidth*mapHeight;i++)
+        {
+            addTile(mapTiles.get(i),36);
+        }
+        addTile(getTile2D(2,2),5); //player 1 base
+        addTile(getTile2D(13,18),0);//player 2 base
 
-        getTile2D(13,18).tileType = 0;
-        getTile2D(13,18).playerThatOwns = 2;
-        getTile2D(13,18).gold = 10;
-        getTile2D(13,18).buildium = 50;
-        getTile2D(13,18).defenders = 5;
-        getTile2D(13,18).attackers = 1;
-        getTile2D(13,18).defensiveValue = 2;
-
-        //mapTiles.get(4).tileType = 0;
-
-        // end example
+        addTile(getTile2D(7,10),6);// lake
+        addTile(getTile2D(5,5),2);// mountain
+        addTile(getTile2D(10,15),2);// mountain
 
         batch =  new SpriteBatch();
         m_fbo = new FrameBuffer(Pixmap.Format.RGB565, (int)(16* mapWidth*mapScale), (int)(16* mapHeight*mapScale), false);
-        m_fbo.begin();
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, 0,  (int)(16* mapWidth*mapScale),(int)(16* mapHeight*mapScale)); // here is the actual size you want
-        batch.setProjectionMatrix(matrix);
-        for (int i =0;i<mapWidth*mapHeight;i++)
-        {
-            batch.draw(textureArray.get(35), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
-        }
-        for (int i =0;i<mapWidth*mapHeight;i++)
-        {
-            batch.draw(textureArray.get(mapTiles.get(i).tileType), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
-        }
-        batch.end();
-        m_fbo.end();
+        redrawMap();
     }
 
     public void redrawMap()
@@ -105,6 +71,9 @@ public class Map extends ActorBeta {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, 0,  (int)(16* mapWidth*mapScale),(int)(16* mapHeight*mapScale)); // here is the actual size you want
+        batch.setProjectionMatrix(matrix);
         for (int i =0;i<mapWidth*mapHeight;i++)
         {
             batch.draw(textureArray.get(35), ((i%mapWidth)+1) *16*mapScale,((i/mapWidth)+1) *16*mapScale,0, 0, 16,16,mapScale,mapScale,180);
@@ -156,5 +125,17 @@ public class Map extends ActorBeta {
     {
         cameraX = MathUtils.clamp(x,0,(int)(16* mapWidth*mapScale)-WIDTH);
         cameraY = MathUtils.clamp(y,0,(int)(16* mapHeight*mapScale)-HEIGHT);
+    }
+
+    private void addTile(Tile mapTile, int tileNumber)
+    {
+        Tile masterTile = tileMasterList.tilesMaster.get(tileNumber);
+        mapTile.tileType = masterTile.tileType;
+        mapTile.playerThatOwns = masterTile.playerThatOwns;
+        mapTile.buildium = masterTile.buildium;
+        mapTile.gold = masterTile.gold;
+        mapTile.attackers =masterTile.attackers;
+        mapTile.defenders =masterTile.defenders;
+        mapTile.defensiveValue =masterTile.defensiveValue;
     }
 }
