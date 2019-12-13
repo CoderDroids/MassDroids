@@ -1,5 +1,6 @@
 package com.CoderDroids.MassDroids.screen;
 
+import com.CoderDroids.MassDroids.Sound.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
@@ -29,7 +30,6 @@ public class MainMenuScreen extends ScreenBeta {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
         optionPrefs = Gdx.app.getPreferences("OptionPrefs");
 
-        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
         Image playerInfo = new Image(new Texture("GameCover.jpg"));
         playerInfo.setPosition(-300,150);
@@ -54,7 +54,7 @@ public class MainMenuScreen extends ScreenBeta {
                @Override
                public void clicked(InputEvent event, float x, float y) {
                    if( optionPrefs.getBoolean("Option.Effects", true))
-                       click.play(1.0f);
+                       SoundManager.getInstance().click.play(1.0f);
                    mainGame.setScreen( new GameplayScreen2(mainGame) );
                };
            }
@@ -69,7 +69,7 @@ public class MainMenuScreen extends ScreenBeta {
                @Override
                public void clicked(InputEvent event, float x, float y) {
                    if( optionPrefs.getBoolean("Option.Effects", true))
-                       click.play(1.0f);
+                       SoundManager.getInstance().click.play(1.0f);
                    mainGame.setScreen( new OptionMenuScreen(mainGame) );
                };
            }
@@ -84,7 +84,7 @@ public class MainMenuScreen extends ScreenBeta {
                @Override
                public void clicked(InputEvent event, float x, float y) {
                    if( optionPrefs.getBoolean("Option.Effects", true))
-                       click.play(1.0f);
+                       SoundManager.getInstance().click.play(1.0f);
                    mainGame.setScreen( new AboutScreen(mainGame) );
                };
            }

@@ -1,5 +1,6 @@
 package com.CoderDroids.MassDroids.screen;
 
+import com.CoderDroids.MassDroids.Sound.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
@@ -18,7 +19,6 @@ import com.CoderDroids.MassDroids.MyGame;
 import com.CoderDroids.MassDroids.base.ScreenBeta;
 import com.CoderDroids.MassDroids.base.GameBeta;
 
-import static com.CoderDroids.MassDroids.MyGame.backgroundMusic;
 public class OptionMenuScreen extends ScreenBeta {
 
     public OptionMenuScreen(GameBeta game )
@@ -33,7 +33,6 @@ public class OptionMenuScreen extends ScreenBeta {
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
         optionPrefs = Gdx.app.getPreferences("OptionPrefs");
-        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
 
         float btnWidth = MyGame.SCREEN_WIDTH * 0.4f;
@@ -65,13 +64,13 @@ public class OptionMenuScreen extends ScreenBeta {
                 optionPrefs.putBoolean("Option.Music", musicButton.isChecked() );
                 optionPrefs.flush();
                 if( optionPrefs.getBoolean("Option.Effects", true)) {
-                    click.play(1.0f);
+                    SoundManager.getInstance().click.play(1.0f);
                 }
                 if(musicButton.isChecked()) {
-                    backgroundMusic.play();
+                    SoundManager.getInstance().backgroundMusic.play();
                 }
                 else {
-                    backgroundMusic.stop();
+                    SoundManager.getInstance().backgroundMusic.stop();
                 }
             }
         });
@@ -90,7 +89,7 @@ public class OptionMenuScreen extends ScreenBeta {
                 optionPrefs.putBoolean("Option.Effects", effectButton.isChecked() );
                 optionPrefs.flush();
                 if( optionPrefs.getBoolean("Option.Effects", true)) {
-                    click.play(1.0f);
+                    SoundManager.getInstance().click.play(1.0f);
                 }
             }
         });
@@ -109,7 +108,7 @@ public class OptionMenuScreen extends ScreenBeta {
                                      @Override
                                      public void clicked(InputEvent event, float x, float y) {
                                          if( optionPrefs.getBoolean("Option.Effects", true))
-                                             click.play(1.0f);
+                                             SoundManager.getInstance().click.play(1.0f);
                                          mainGame.setScreen( new ExitScreen(mainGame) );
              };
          }
@@ -124,7 +123,7 @@ public class OptionMenuScreen extends ScreenBeta {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if( optionPrefs.getBoolean("Option.Effects", true))
-                                           click.play(1.0f);
+                                           SoundManager.getInstance().click.play(1.0f);
                                        mainGame.setScreen( new MainMenuScreen(mainGame) );
            };
        }

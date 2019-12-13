@@ -4,7 +4,6 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.CoderDroids.MassDroids.base.GameBeta;
 import com.CoderDroids.MassDroids.screen.SplashScreen;
-import com.badlogic.gdx.audio.Music;
 
 public class MyGame extends GameBeta {
 
@@ -13,7 +12,6 @@ public class MyGame extends GameBeta {
     public static float SCREEN_WIDTH;
     public static float SCREEN_HEIGHT;
 
-    public static Music backgroundMusic;
 
     @Override
     public void create(){
