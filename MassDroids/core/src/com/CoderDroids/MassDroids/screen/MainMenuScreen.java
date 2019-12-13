@@ -1,6 +1,8 @@
 package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,12 +21,15 @@ public class MainMenuScreen extends ScreenBeta {
     {
         super(game);
     }
-
+    Preferences optionPrefs;
 
     @Override
     public void initialize()
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
+        optionPrefs = Gdx.app.getPreferences("OptionPrefs");
+
+        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
         Image playerInfo = new Image(new Texture("GameCover.jpg"));
         playerInfo.setPosition(-300,150);
@@ -48,6 +53,8 @@ public class MainMenuScreen extends ScreenBeta {
         playButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
+                   if( optionPrefs.getBoolean("Option.Effects", true))
+                       click.play(1.0f);
                    mainGame.setScreen( new GameplayScreen2(mainGame) );
                };
            }
@@ -61,6 +68,8 @@ public class MainMenuScreen extends ScreenBeta {
         optionButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
+                   if( optionPrefs.getBoolean("Option.Effects", true))
+                       click.play(1.0f);
                    mainGame.setScreen( new OptionMenuScreen(mainGame) );
                };
            }
@@ -74,6 +83,8 @@ public class MainMenuScreen extends ScreenBeta {
         aboutButton.addListener(new ClickListener(){
                @Override
                public void clicked(InputEvent event, float x, float y) {
+                   if( optionPrefs.getBoolean("Option.Effects", true))
+                       click.play(1.0f);
                    mainGame.setScreen( new AboutScreen(mainGame) );
                };
            }

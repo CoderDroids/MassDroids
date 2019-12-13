@@ -1,6 +1,8 @@
 package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -17,11 +19,16 @@ public class AboutScreen extends ScreenBeta {
         super(game);
     }
 
+    Preferences optionPrefs;
+    final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
 
     @Override
     public void initialize()
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
+        optionPrefs = Gdx.app.getPreferences("OptionPrefs");
+
+
 
         Image backgroundColor = new Image(new Texture("blackBackground.jpg"));
         backgroundColor.setPosition(-300,0);
@@ -74,6 +81,8 @@ public class AboutScreen extends ScreenBeta {
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         super.touchDown(screenX, screenY, pointer, button);
+        if( optionPrefs.getBoolean("Option.Effects", true))
+            click.play(1.0f);
         mainGame.setScreen( new MainMenuScreen(mainGame) );
         return true;
     }

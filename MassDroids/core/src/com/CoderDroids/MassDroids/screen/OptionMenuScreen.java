@@ -2,6 +2,7 @@ package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -17,6 +18,7 @@ import com.CoderDroids.MassDroids.MyGame;
 import com.CoderDroids.MassDroids.base.ScreenBeta;
 import com.CoderDroids.MassDroids.base.GameBeta;
 
+import static com.CoderDroids.MassDroids.MyGame.backgroundMusic;
 public class OptionMenuScreen extends ScreenBeta {
 
     public OptionMenuScreen(GameBeta game )
@@ -31,6 +33,8 @@ public class OptionMenuScreen extends ScreenBeta {
     {
         Skin skin = new Skin(Gdx.files.internal("skins/star-soldier/skin/star-soldier-ui.json"));
         optionPrefs = Gdx.app.getPreferences("OptionPrefs");
+        final Sound click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
+
 
         float btnWidth = MyGame.SCREEN_WIDTH * 0.4f;
         float btnHeight = MyGame.SCREEN_HEIGHT * 0.1f;
@@ -59,7 +63,14 @@ public class OptionMenuScreen extends ScreenBeta {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 optionPrefs.putBoolean("Option.Music", musicButton.isChecked() );
-                optionPrefs.flush();
+                if( optionPrefs.getBoolean("Option.Effects", true))
+                    click.play(1.0f);
+                if(musicButton.isChecked()) {
+                    backgroundMusic.play();
+                }
+                else {
+                    backgroundMusic.stop();
+                }
             }
         });
 
@@ -75,7 +86,8 @@ public class OptionMenuScreen extends ScreenBeta {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
                 optionPrefs.putBoolean("Option.Effects", effectButton.isChecked() );
-                optionPrefs.flush();
+                if( optionPrefs.getBoolean("Option.Effects", true))
+                    click.play(1.0f);
             }
         });
 
@@ -92,7 +104,9 @@ public class OptionMenuScreen extends ScreenBeta {
         aboutButton.addListener(new ClickListener(){
                                      @Override
                                      public void clicked(InputEvent event, float x, float y) {
-                 mainGame.setScreen( new ExitScreen(mainGame) );
+                                         if( optionPrefs.getBoolean("Option.Effects", true))
+                                             click.play(1.0f);
+                                         mainGame.setScreen( new ExitScreen(mainGame) );
              };
          }
         );
@@ -105,7 +119,9 @@ public class OptionMenuScreen extends ScreenBeta {
         backButton.addListener(new ClickListener(){
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
-               mainGame.setScreen( new MainMenuScreen(mainGame) );
+                                       if( optionPrefs.getBoolean("Option.Effects", true))
+                                           click.play(1.0f);
+                                       mainGame.setScreen( new MainMenuScreen(mainGame) );
            };
        }
         );

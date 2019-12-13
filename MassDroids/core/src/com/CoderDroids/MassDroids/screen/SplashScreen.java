@@ -1,6 +1,8 @@
 package com.CoderDroids.MassDroids.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,6 +14,8 @@ import com.CoderDroids.MassDroids.base.ScreenBeta;
 
 import static com.CoderDroids.MassDroids.MyGame.SCREEN_WIDTH;
 import static com.CoderDroids.MassDroids.MyGame.SCREEN_HEIGHT;
+import static com.CoderDroids.MassDroids.MyGame.backgroundMusic;
+
 
 public class SplashScreen extends ScreenBeta {
 
@@ -20,9 +24,18 @@ public class SplashScreen extends ScreenBeta {
         super(game);
     }
 
+    Preferences optionPrefs;
+
     @Override
     public void initialize()
     {
+        optionPrefs = Gdx.app.getPreferences("OptionPrefs");
+        backgroundMusic=  Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        backgroundMusic.setLooping(true);
+        if( optionPrefs.getBoolean("Option.Music", true))
+            backgroundMusic.play();
+
+
         Skin skin = new Skin(Gdx.files.internal("skins/quantum-horizon/skin/quantum-horizon-ui.json"));
 
         float btnWidth = SCREEN_WIDTH / 4;
