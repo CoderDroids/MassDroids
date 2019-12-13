@@ -23,24 +23,27 @@ import java.util.Random;
 
 public class Map extends ActorBeta {
 
+    static int WIDTH = Gdx.graphics.getWidth();
+    static int HEIGHT = Gdx.graphics.getHeight();
+
     int mapWidth = 15; //number of tiles to each axis
     int mapHeight = 20;
     int cameraX =0; //camera coordinates
     int cameraY =0;
-    int mapScale = 7; //visual zoom feature
+
+    int mapScale = MathUtils.ceil(((WIDTH/1080.0f)>(HEIGHT/1920.0f)) ? (WIDTH/1080.0f) *7 : (HEIGHT/1920.0f)*7); //visual zoom feature
 
 
     FrameBuffer m_fbo;
     Texture loadedTexture;
     Array<TextureRegion> textureArray;
     SpriteBatch batch;
-    static int WIDTH = Gdx.graphics.getWidth();
-    static int HEIGHT = Gdx.graphics.getHeight();
     public Array<Tile> mapTiles = new Array<Tile>();
     TileSettings tileMasterList = new TileSettings();
 
     public Map(Stage s) {
         super(0, 0, s);
+
         loadedTexture = new Texture(Gdx.files.internal("tiles.png"));
         loadedTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
         textureArray = new Array<TextureRegion>();
