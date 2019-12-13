@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.MathUtils;
 
+import java.util.Random;
+
 
 public class Map extends ActorBeta {
 
@@ -57,20 +59,28 @@ public class Map extends ActorBeta {
             mapTiles.add(testTile);
         }
         getTile2D(2,2).tileType = 5;
-        getTile2D(2,2).playerThatOwns = 1;
+        getTile2D(2,2).playerThatOwns = 0;
         getTile2D(2,2).gold = 10;
         getTile2D(2,2).buildium = 50;
         getTile2D(2,2).defenders = 5;
         getTile2D(2,2).attackers = 1;
         getTile2D(2,2).defensiveValue = 2;
 
-        getTile2D(13,18).tileType = 0;
-        getTile2D(13,18).playerThatOwns = 2;
-        getTile2D(13,18).gold = 10;
-        getTile2D(13,18).buildium = 50;
-        getTile2D(13,18).defenders = 5;
-        getTile2D(13,18).attackers = 1;
-        getTile2D(13,18).defensiveValue = 2;
+        for( int i = 0; i < 5; i++ )
+        {
+            Random rnd = new Random();
+            int x = rnd.nextInt(10) + 3;
+            int y = rnd.nextInt(15) + 3;
+            getTile2D(x,y).tileType = 0;
+            getTile2D(x,y).playerThatOwns = i + 1;
+            getTile2D(x,y).gold = 10;
+            getTile2D(x,y).buildium = 50;
+            getTile2D(x,y).defenders = 5;
+            getTile2D(x,y).attackers = 1;
+            getTile2D(x,y).defensiveValue = 2;
+        }
+
+
 
         //mapTiles.get(4).tileType = 0;
 
